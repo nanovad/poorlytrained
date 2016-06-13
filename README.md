@@ -2,7 +2,13 @@
 ### A Markov chain Twitter bot that can be trained on various source texts.
 
 #### Installation
-Install the requirements with  
+###### Download
+Clone the repository:
+`git clone https://github.com/nanovad/poorlytrained.git`  
+Change to the repo directory:  
+`cd poorlytrained`  
+###### Initialize
+Install the requirements:  
 `sudo pip3 install -r requirements.txt`  
 Set the API keys in poorlytrained.ini to your Twitter API keys.
 
