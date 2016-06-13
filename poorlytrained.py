@@ -16,7 +16,14 @@ def main():
 	args = arg_parser.parse_args()
 
 	if(args.subparser_name == "train"):
-		pass # TODO: Train.
+		with open(args.corpus) as f:
+			text = f.read()
+
+		text_model = markovify.Text(text)
+
+		with open(args.savepath, "w") as f:
+			f.write(text_model.chain.to_json())
+
 	elif(args.subparser_name == "generate"):
 		pass # TODO: Generate
 
