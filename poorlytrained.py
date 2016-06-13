@@ -10,8 +10,8 @@ def main():
 	subparser_train.add_argument("corpus", help="Path to a corpus to train with.")
 	subparser_train.add_argument("savepath", help="Path to where to save the model, in JSON format.")
 
-	subparser_generate = subparser.add_parser("generate")
-	subparser_generate.add_argument("savepath", help="Path to a model built with \"train\"")
+	subparser_tweet = subparser.add_parser("tweet")
+	subparser_tweet.add_argument("modelpath", help="Path to a model built with \"train\"")
 
 	args = arg_parser.parse_args()
 
@@ -24,8 +24,7 @@ def main():
 		with open(args.savepath, "w") as f:
 			f.write(text_model.chain.to_json())
 
-	elif(args.subparser_name == "generate"):
-		pass # TODO: Generate
-
+	elif(args.subparser_name == "tweet"):
+		pass
 if __name__ == "__main__":
 	main()
