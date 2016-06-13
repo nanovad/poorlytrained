@@ -2,6 +2,8 @@ import markovify
 import sys
 import argparse
 
+import twitter
+
 def main():
 	arg_parser = argparse.ArgumentParser(description="Generate text with Markov chains based on a source corpus.")
 	subparser = arg_parser.add_subparsers(dest="subparser_name")
@@ -11,6 +13,7 @@ def main():
 	subparser_train.add_argument("savepath", help="Path to where to save the model, in JSON format.")
 
 	subparser_tweet = subparser.add_parser("tweet")
+	subparser_tweet.add_argument("corpus", help="Path to a corpus.")
 	subparser_tweet.add_argument("modelpath", help="Path to a model built with \"train\"")
 
 	args = arg_parser.parse_args()
@@ -25,6 +28,12 @@ def main():
 			f.write(text_model.chain.to_json())
 
 	elif(args.subparser_name == "tweet"):
-		pass
+		with open(args.corpus) as corpus:
+			with open(args.modelpath) as model:
+				model_chain = markovify.Chain.from_json(model.read())
+				text_model = markovify.Text(corpus.read(), 2, model_chain)
+
+		tweet_message = text_model.make_short_sentence(140)
+		print(tweet_message)
 if __name__ == "__main__":
 	main()
