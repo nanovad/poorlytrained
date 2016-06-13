@@ -1,7 +1,7 @@
 import markovify
 import sys
 import argparse
-
+import configparser
 import twitter
 
 def main():
@@ -17,6 +17,13 @@ def main():
 	subparser_tweet.add_argument("modelpath", help="Path to a model built with \"train\"")
 
 	args = arg_parser.parse_args()
+
+	config = configparser.ConfigParser()
+	config.read("poorlytrained.ini")
+	twitter_consumer_key = config["keys"]["consumerkey"]
+	twitter_consumer_secret = config["keys"]["consumersecret"]
+	twitter_access_token = config["keys"]["accesstoken"]
+	twitter_access_token_secret = config["keys"]["accesstokensecret"]
 
 	if(args.subparser_name == "train"):
 		with open(args.corpus) as f:
