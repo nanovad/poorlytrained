@@ -42,5 +42,8 @@ def main():
 
 		tweet_message = text_model.make_short_sentence(140)
 		print(tweet_message)
+
+		tapi = twitter.Api(twitter_consumer_key, twitter_consumer_secret, twitter_access_token, twitter_access_token_secret)
+		tapi.PostUpdate(tweet_message)
 if __name__ == "__main__":
 	main()
