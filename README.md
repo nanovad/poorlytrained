@@ -25,3 +25,7 @@ Generation requires both a corpus and a model.
 To generate some text using 'corpus.txt' and 'model.json':
 
 `python3 poorlytrained.py tweet corpus.txt model.json`
+
+PoorlyTrained also supports running without posting to Twitter. Simply prepend `--no-post` anywhere in the arguments, for example:
+
+`python3 poorlytrained.py tweet --no-post corpus.txt model.json
