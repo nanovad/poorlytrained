@@ -15,6 +15,7 @@ def main():
 	subparser_tweet = subparser.add_parser("tweet")
 	subparser_tweet.add_argument("corpus", help="Path to a corpus.")
 	subparser_tweet.add_argument("modelpath", help="Path to a model built with \"train\"")
+	subparser_tweet.add_argument("--no-post", help="Do not post to Twitter, write to stdout and exit.", action="store_true")
 
 	args = arg_parser.parse_args()
 
@@ -42,8 +43,9 @@ def main():
 
 		tweet_message = text_model.make_short_sentence(140)
 		print(tweet_message)
-
-		tapi = twitter.Api(twitter_consumer_key, twitter_consumer_secret, twitter_access_token, twitter_access_token_secret)
-		tapi.PostUpdate(tweet_message)
+		
+		if(args.no_post == False): # If --no-post was not specified, go ahead and post.
+			tapi = twitter.Api(twitter_consumer_key, twitter_consumer_secret, twitter_access_token, twitter_access_token_secret)
+			tapi.PostUpdate(tweet_message)
 if __name__ == "__main__":
 	main()
