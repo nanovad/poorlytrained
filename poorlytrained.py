@@ -4,6 +4,9 @@ import argparse
 import configparser
 import twitter
 
+model_depth_default = 2
+model_depth = model_depth_default
+
 def main():
 	arg_parser = argparse.ArgumentParser(description="Generate text with Markov chains based on a source corpus.")
 	subparser = arg_parser.add_subparsers(dest="subparser_name")
@@ -26,6 +29,11 @@ def main():
 	twitter_access_token = config["keys"]["accesstoken"]
 	twitter_access_token_secret = config["keys"]["accesstokensecret"]
 
+	try:
+		model_depth = config["markov"]["modeldepth"]
+	except:
+		sys.stderr.write("WARNING: Could not read model depth from configuration file. Defaulting to {}.\n".format(model_depth_default))
+
 	if(args.subparser_name == "train"):
 		with open(args.corpus) as f:
 			text = f.read()
@@ -39,7 +47,7 @@ def main():
 		with open(args.corpus) as corpus:
 			with open(args.modelpath) as model:
 				model_chain = markovify.Chain.from_json(model.read())
-				text_model = markovify.Text(corpus.read(), 2, model_chain)
+				text_model = markovify.Text(corpus.read(), model_depth, model_chain)
 
 		tweet_message = text_model.make_short_sentence(140)
 		print(tweet_message)
