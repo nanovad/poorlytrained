@@ -10,7 +10,15 @@ Change to the repo directory:
 ###### Initialize
 Install the requirements:  
 `sudo pip3 install -r requirements.txt`  
-Set the API keys in poorlytrained.ini to your Twitter API keys.
+
+#### Configuration
+A few different settings can be tweaked in the configuration file (poorlytrained.ini).  
+The most important of these are the Twitter API keys. Without them, the bot will not be able to post to Twitter.  
+These values **must** be set before you attempt to tweet. You can find these after creating an app at [https://apps.twitter.com].  
+Just fill these values in in the \[keys\] section of poorlytrained.ini.  
+
+There are also values that can tweak Markov chain behavior (these are stored in a section titled \[markov\].)  
+Currently, the only value in this section is `modeldepth`, which configures the Markov chain model depth.
 
 #### Training
 Training is accomplished by feeding the Markov chain a source text (reffered to as a 'corpus').  
