@@ -8,9 +8,20 @@ Clone the repository:
 Change to the repo directory:  
 `cd poorlytrained`  
 ###### Initialize
-Install the requirements:  
-`sudo pip3 install -r requirements.txt`  
+Install virtualenv:  
+`sudo pip3 install virtualenv`
 
+Create a new virtual environment for the bot, using Python3:  
+`virtualenv --python=python3 env`
+
+Activate the environment:  
+`source env/bin/activate`
+
+Install the requirements:  
+`pip install -r requirements.txt`  
+
+Deactivate the environment:  
+`deactivate`
 #### Configuration
 A few different settings can be tweaked in the configuration file (poorlytrained.ini).  
 The most important of these are the Twitter API keys. Without them, the bot will not be able to post to Twitter.  
